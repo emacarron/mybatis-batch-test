@@ -24,7 +24,6 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,26 +50,14 @@ public class BaseTest {
   }
 
   @Test
-  public void shouldGetAUser() {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      Mapper mapper = sqlSession.getMapper(Mapper.class);
-      User user = mapper.getUser(1);
-      Assert.assertEquals("User1", user.getName());
-    } finally {
-      sqlSession.close();
-    }
-  }
-
-  @Test
   public void shouldInsertAUser() {
     SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
     try {
       Mapper mapper = sqlSession.getMapper(Mapper.class);
+      User user = new User();
+      user.setId(1);
+      user.setName("User");
       for (int i = 0; i < 1000000; i++) {
-        User user = new User();
-        user.setId(2);
-        user.setName("User2");
         mapper.insertUser(user);
       }
     } finally {

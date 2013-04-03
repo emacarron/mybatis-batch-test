@@ -1,5 +1,5 @@
 --
---    Copyright 2009-2012 The MyBatis Team
+--    Copyright 2009-2013 The MyBatis Team
 --
 --    Licensed under the Apache License, Version 2.0 (the "License");
 --    you may not use this file except in compliance with the License.
@@ -14,11 +14,7 @@
 --    limitations under the License.
 --
 
-drop table users if exists;
-
 create table users (
   id int,
   name varchar(20)
 );
-
-insert into users (id, name) values(1, 'User1');
