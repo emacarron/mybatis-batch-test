@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.apache.ibatis.submitted.basetest;
+package test.batch;
 
 import java.io.Reader;
 import java.sql.Connection;
@@ -27,21 +27,21 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BaseTest {
+public class MyBatisTest {
 
   private static SqlSessionFactory sqlSessionFactory;
 
   @BeforeClass
   public static void setUp() throws Exception {
     // create a SqlSessionFactory
-    Reader reader = Resources.getResourceAsReader("org/apache/ibatis/submitted/basetest/mybatis-config.xml");
+    Reader reader = Resources.getResourceAsReader("test/batch/mybatis-config.xml");
     sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
     reader.close();
 
     // populate in-memory database
     SqlSession session = sqlSessionFactory.openSession();
     Connection conn = session.getConnection();
-    reader = Resources.getResourceAsReader("org/apache/ibatis/submitted/basetest/CreateDB.sql");
+    reader = Resources.getResourceAsReader("test/batch/CreateDB.sql");
     ScriptRunner runner = new ScriptRunner(conn);
     runner.setLogWriter(null);
     runner.runScript(reader);
@@ -53,12 +53,11 @@ public class BaseTest {
   public void shouldInsertAUser() {
     SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
     try {
-      Mapper mapper = sqlSession.getMapper(Mapper.class);
       User user = new User();
       user.setId(1);
       user.setName("User");
       for (int i = 0; i < 1000000; i++) {
-        mapper.insertUser(user);
+        sqlSession.update("insertUser", user);
       }
     } finally {
       sqlSession.close();
