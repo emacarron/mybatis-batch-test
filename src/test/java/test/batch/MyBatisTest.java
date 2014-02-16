@@ -50,7 +50,7 @@ public class MyBatisTest {
   }
 
   @Test
-  public void shouldInsertAUser() {
+  public void insertOneMillionUsers() {
     SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
     try {
       User user = new User();

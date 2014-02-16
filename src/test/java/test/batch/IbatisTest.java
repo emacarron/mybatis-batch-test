@@ -35,7 +35,7 @@ public class IbatisTest {
   }
 
   @Test
-  public void shouldInsertAUser() throws SQLException {
+  public void insertOneMillionUsers() throws SQLException {
     sqlmapClient.startTransaction();
     try {
       User user = new User();
