@@ -34,7 +34,7 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="test/batch/Mapper.xml" />
+		<mapper resource="test/batch/mapper.xml" />
 	</mappers>
 
 </configuration>

@@ -4,11 +4,11 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ibatis.common.jdbc.ScriptRunner;
+import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
@@ -26,7 +26,7 @@ public class IbatisTest {
     sqlmapClient.startTransaction();
     Connection conn = sqlmapClient.getCurrentConnection();
     reader = Resources.getResourceAsReader("test/batch/CreateDB.sql");
-    ScriptRunner runner = new ScriptRunner(conn);
+    ScriptRunner runner = new ScriptRunner(conn, true, true);
     runner.setLogWriter(null);
     runner.runScript(reader);
     reader.close();

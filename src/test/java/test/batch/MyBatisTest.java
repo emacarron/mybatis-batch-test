@@ -59,6 +59,7 @@ public class MyBatisTest {
       for (int i = 0; i < 1000000; i++) {
         sqlSession.update("insertUser", user);
       }
+      sqlSession.commit();
     } finally {
       sqlSession.close();
     }
