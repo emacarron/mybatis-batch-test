@@ -4,8 +4,6 @@
         "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 <sqlMapConfig>
 
-	<settings useStatementNamespaces="true" />
-
 	<transactionManager type="JDBC">
 		<dataSource type="SIMPLE">
 			<property name="JDBC.Driver" value="org.hsqldb.jdbcDriver" />
@@ -15,6 +13,6 @@
 		</dataSource>
 	</transactionManager>
 
-	<sqlMap resource="test/batch/user.xml" />
+	<sqlMap resource="test/batch/sqlmap.xml" />
 
 </sqlMapConfig>

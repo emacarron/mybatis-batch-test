@@ -43,7 +43,7 @@ public class IbatisTest {
       user.setName("User");
       sqlmapClient.startBatch();
       for (int i = 0; i < 1000000; i++) {
-        sqlmapClient.insert("user.insertUser", user);
+        sqlmapClient.insert("insertUser", user);
       }
       sqlmapClient.executeBatch();
     } finally {
